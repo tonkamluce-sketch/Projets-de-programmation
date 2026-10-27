@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luce Tonkam - Portfolio</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0f172a',
+                        cardBg: 'rgba(30, 41, 59, 0.7)',
+                        cardHover: 'rgba(51, 65, 85, 0.8)',
+                        accentCyan: '#38bdf8',
+                        accentIndigo: '#818cf8',
+                        accentViolet: '#c084fc',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Glowing Accents */
+        .glow-top {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(129, 140, 248, 0.08) 45%, rgba(15, 23, 42, 0) 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .glow-bottom {
+            position: fixed;
+            bottom: -150px;
+            right: -100px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(192, 132, 252, 0.1) 0%, rgba(56, 189, 248, 0.03) 50%, rgba(15, 23, 42, 0) 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Glassmorphism & Custom Gradient Text */
+        .glass-header {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #38bdf8 0%, #6366f1 100%);
+            color: #0f172a;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-primary:hover {
+            opacity: 0.95;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #f8fafc;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: #38bdf8;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -5px rgba(15, 23, 42, 0.8);
+        }
+
+        .card-custom {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-custom:hover {
+            border-color: rgba(56, 189, 248, 0.35);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 30px -10px rgba(15, 23, 42, 0.7), 0 0 15px 0 rgba(56, 189, 248, 0.08);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col justify-between relative selection:bg-sky-500 selection:text-slate-900">
+
+    <!-- Ambient Glowing Backgrounds -->
+    <div class="glow-top"></div>
+    <div class="glow-bottom"></div>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-header px-6 py-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <a href="#accueil" class="text-xl font-extrabold tracking-tight text-gradient">Luce Tonkam</a>
+            <nav class="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
+                <a href="#accueil" class="hover:text-accentCyan transition">Accueil</a>
+                <a href="#apropos" class="hover:text-accentCyan transition">À propos</a>
+                <a href="#competences" class="hover:text-accentCyan transition">Compétences</a>
+                <a href="#projets" class="hover:text-accentCyan transition">Projets</a>
+                <a href="#contact" class="hover:text-accentCyan transition">Contact</a>
+            </nav>
+            <a href="https://wa.me/237676656785" target="_blank" rel="noopener noreferrer" class="btn-primary px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2">
+                <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-grow pt-24 relative z-10">
+
+        <!-- HERO SECTION -->
+        <section id="accueil" class="min-h-[85vh] flex flex-col justify-center items-center text-center px-6 py-12 max-w-4xl mx-auto">
+
+         <div class="relative w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden border-2 border-sky-400 shadow-lg shadow-sky-500/20">
+    <img src="profile.jpg.jpeg" alt="Luce Tonkam" class="w-full h-full object-contain">
+</div>
+
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 mb-6 rounded-full bg-slate-800/80 border border-slate-700/80 text-accentCyan text-xs font-semibold backdrop-blur-md">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                ICT University Student
+            </div>
+
+            <h1 class="text-4xl sm:text-6xl font-black mb-4 tracking-tight leading-tight">
+                Luce Tonkam
+            </h1>
+
+            <p class="text-base sm:text-lg text-accentCyan font-semibold mb-4 max-w-2xl">
+                Étudiante en informatique à l'ICT University | Veille &amp; Partage d'opportunités tech | Développeuse full stack en devenir | Python | Java
+            </p>
+
+            <p class="text-slate-400 text-sm sm:text-base max-w-xl mb-8 leading-relaxed font-normal">
+                Étudiante en informatique à l'ICT University, passionnée par la programmation et le monde logiciel, en route vers le développement Full-Stack.
+            </p>
+
+            <div class="flex flex-wrap gap-4 justify-center mb-10">
+                <a href="https://wa.me/237676656785" target="_blank" rel="noopener noreferrer" class="btn-primary px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-base"></i> WhatsApp Direct
+                </a>
+                <a href="#projets" class="btn-secondary px-6 py-3 rounded-xl font-semibold text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-code text-accentCyan"></i> Découvrir mes projets
+                </a>
+            </div>
+
+            <!-- Social Links Icons -->
+            <div class="flex gap-6 text-slate-400 text-xl">
+                <a href="https://github.com/tonkamluce-sketch" target="_blank" rel="noopener noreferrer" class="hover:text-accentCyan transition-colors" title="GitHub">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/luce-tonkam" target="_blank" rel="noopener noreferrer" class="hover:text-accentIndigo transition-colors" title="LinkedIn">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+                <a href="https://wa.me/237676656785" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors" title="WhatsApp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+                <a href="mailto:tonkamluce@gmail.com" class="hover:text-accentViolet transition-colors" title="Email">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- À PROPOS SECTION -->
+        <section id="apropos" class="py-16 px-6 max-w-5xl mx-auto">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-center mb-12">À <span class="text-gradient">Propos</span></h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Parcours -->
+                <div class="card-custom p-6 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-xl bg-sky-500/10 text-accentCyan flex items-center justify-center text-lg mb-4">
+                            <i class="fa-solid fa-rocket"></i>
+                        </div>
+                        <h3 class="text-base font-bold mb-2 text-slate-100">Parcours Tech</h3>
+                        <p class="text-slate-300 text-xs leading-relaxed">
+                            Évolution rapide dans la tech. Participation active aux conférences majeures : <strong>PyCon Cameroon</strong>, <strong>UbuCon Cameroon</strong> et <strong>Dev Days</strong>.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Freelance SOTECH AFRICA -->
+                <div class="card-custom p-6 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-accentIndigo flex items-center justify-center text-lg mb-4">
+                            <i class="fa-solid fa-briefcase"></i>
+                        </div>
+                        <h3 class="text-base font-bold mb-2 text-slate-100">Freelance</h3>
+                        <p class="text-slate-300 text-xs leading-relaxed">
+                            <strong>SOTECH AFRICA</strong><br>
+                            Veille &amp; Partage d'opportunités tech pour la communauté des développeurs.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Certification IBM -->
+                <div class="card-custom p-6 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-accentViolet flex items-center justify-center text-lg mb-4">
+                            <i class="fa-solid fa-certificate"></i>
+                        </div>
+                        <h3 class="text-base font-bold mb-2 text-slate-100">Certification</h3>
+                        <p class="text-slate-300 text-xs leading-relaxed">
+                            <strong>Web Development Fundamentals</strong><br>
+                            Délivrée par <strong>IBM</strong>.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Langues -->
+                <div class="card-custom p-6 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg mb-4">
+                            <i class="fa-solid fa-language"></i>
+                        </div>
+                        <h3 class="text-base font-bold mb-2 text-slate-100">Langues</h3>
+                        <ul class="text-slate-300 text-xs space-y-1.5 leading-relaxed">
+                            <li><strong>Français :</strong> Maternelle</li>
+                            <li><strong>Anglais :</strong> Notions de base</li>
+                            <li><strong>Espagnol :</strong> Notions de base</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPÉTENCES TECHNIQUES SECTION -->
+        <section id="competences" class="py-16 px-6 max-w-4xl mx-auto">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-center mb-12">Mes <span class="text-gradient">Compétences</span></h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Langages avec jauges de progression -->
+                <div class="card-custom p-6 rounded-2xl">
+                    <h3 class="text-base font-bold mb-6 text-slate-200 flex items-center gap-2">
+                        <i class="fa-solid fa-code text-accentCyan"></i> Langages de Programmation
+                    </h3>
+
+                    <!-- Python -->
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs font-semibold text-slate-200">Python (Bases solides sans POO)</span>
+                            <span class="text-xs font-bold text-accentCyan">75%</span>
+                        </div>
+                        <div class="w-full bg-slate-800/90 rounded-full h-2.5 p-0.5 border border-slate-700/50">
+                            <div class="bg-gradient-to-r from-sky-400 to-indigo-500 h-1.5 rounded-full" style="width: 75%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Java -->
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs font-semibold text-slate-200">Java (Bases &amp; Tableaux)</span>
+                            <span class="text-xs font-bold text-accentIndigo">60%</span>
+                        </div>
+                        <div class="w-full bg-slate-800/90 rounded-full h-2.5 p-0.5 border border-slate-700/50">
+                            <div class="bg-gradient-to-r from-indigo-400 to-purple-500 h-1.5 rounded-full" style="width: 60%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Outils et Environnement (sans pourcentage) -->
+                <div class="card-custom p-6 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-base font-bold mb-6 text-slate-200 flex items-center gap-2">
+                            <i class="fa-solid fa-toolbox text-accentViolet"></i> Outils &amp; Méthodes
+                        </h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center gap-3">
+                                <i class="fa-solid fa-laptop-code text-accentCyan text-base"></i>
+                                <span class="font-semibold text-xs text-slate-200">VS Code</span>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center gap-3">
+                                <i class="fa-brands fa-git-alt text-orange-400 text-base"></i>
+                                <span class="font-semibold text-xs text-slate-200">Git</span>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center gap-3">
+                                <i class="fa-brands fa-github text-purple-400 text-base"></i>
+                                <span class="font-semibold text-xs text-slate-200">GitHub</span>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700/60 flex items-center gap-3">
+                                <i class="fa-solid fa-radar text-emerald-400 text-base"></i>
+                                <span class="font-semibold text-xs text-slate-200">Veille Tech</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJETS SECTION (4 PROJETS CLÉS) -->
+        <section id="projets" class="py-16 px-6 max-w-5xl mx-auto">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-center mb-12">Mes <span class="text-gradient">Projets</span></h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Projet 1 -->
+                <div class="card-custom rounded-2xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-[11px] font-bold px-3 py-1 rounded-full bg-sky-500/10 text-accentCyan border border-sky-500/20">Java</span>
+                            <a href="https://github.com/tonkamluce-sketch" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white transition"><i class="fa-brands fa-github text-lg"></i></a>
+                        </div>
+                        <h3 class="text-base font-bold mb-2 text-slate-100">Calculateur &amp; Gestionnaire de Moyennes</h3>
+                        <p class="text-slate-300 text-xs leading-relaxed mb-6">
+                            Application Java développée pour la saisie et le calcul automatique de moyennes avec l'utilisation de tableaux (arrays), de la boucle <code class="text-accentCyan font-mono">for</code> et de la classe <code class="text-accentCyan font-mono">Scanner</code>.
+                        </p>
+                    </div>
+                    <button onclick="toggleModal('modal-p1')" class="text-xs font-bold text-accentCyan hover:underline text-left flex items-center gap-2">
+                        <i class="fa-solid fa-code"></i> Voir l'extrait de code
+                    </button>
+                </div>
+
+                <!-- Projet 2 -->
+                <div class="card-custom rounded-2xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-[11px] font-bold px-3 py-1 rounded-full bg-indigo-500/10 text-accentIndigo border border-indigo-500/20">Java</span>
+                            <a href="https://github.com/tonkamluce-sketch" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white transition"><i class="fa-brands fa-github text-lg"></i></a>
+                        </div>
+                        <h3 class="text-base font-bold mb-2 text-slate-100">Convertisseur de Devises</h3>
+                        <p class="text-slate-300 text-xs leading-relaxed mb-6">
+                            Programme de conversion monétaire en Java s'appuyant sur des taux fixes, l'objet <code class="text-accentIndigo font-mono">Scanner</code> et la gestion des choix via structures conditionnelles.
+                        </p>
+                    </div>
+                    <button onclick="toggleModal('modal-p2')" class="text-xs font-bold text-accentIndigo hover:underline text-left flex items-center gap-2">
+                        <i class="fa-solid fa-code"></i> Voir l'extrait de code
+                    </button>
+                </div>
+
+                <!-- Projet 3 -->
+                <div class="card-custom rounded-2xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-[11px] font-bold px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Python</span>
+                            <a href="https://github.com/tonkamluce-sketch" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white transition"><i class="fa-brands fa-github text-lg"></i></a>
+                        </div>
+                        <h3 class="text-base font-bold mb-2 text-slate-100">Scripts d'Automatisation Python</h3>
+                        <p class="text-slate-300 text-xs leading-relaxed mb-6">
+                            Ensemble de scripts utilitaires en Python axés sur la manipulation élémentaire de données et l'automatisation de traitements logiques.
+                        </p>
+                    </div>
+                    <a href="https://github.com/tonkamluce-sketch" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-emerald-400 hover:underline flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Consulter sur GitHub
+                    </a>
+                </div>
+
+                <!-- Projet 4 -->
+                <div class="card-custom rounded-2xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-[11px] font-bold px-3 py-1 rounded-full bg-purple-500/10 text-accentViolet border border-purple-500/20">Java</span>
+                            <a href="https://github.com/tonkamluce-sketch" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white transition"><i class="fa-brands fa-github text-lg"></i></a>
+                        </div>
+                        <h3 class="text-base font-bold mb-2 text-slate-100">Projet Algorithmique Java</h3>
+                        <p class="text-slate-300 text-xs leading-relaxed mb-6">
+                            Implémentation d'algorithmes fondamentaux et résolution de problèmes logiques complexes en langage Java console.
+                        </p>
+                    </div>
+                    <a href="https://github.com/tonkamluce-sketch" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-accentViolet hover:underline flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Consulter sur GitHub
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="py-16 px-6 max-w-4xl mx-auto">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-center mb-12">Me <span class="text-gradient">Contacter</span></h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- WhatsApp -->
+                <a href="https://wa.me/237676656785" target="_blank" rel="noopener noreferrer" class="card-custom p-6 rounded-2xl text-center flex flex-col items-center group">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <h3 class="font-bold text-xs text-slate-200">WhatsApp</h3>
+                    <p class="text-[11px] text-slate-400 mt-1 font-medium">+237 676656785</p>
+                </a>
+
+                <!-- Email -->
+                <a href="mailto:tonkamluce@gmail.com" class="card-custom p-6 rounded-2xl text-center flex flex-col items-center group">
+                    <div class="w-12 h-12 rounded-2xl bg-sky-500/10 text-accentCyan flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <h3 class="font-bold text-xs text-slate-200">Email</h3>
+                    <p class="text-[11px] text-slate-400 mt-1 font-medium break-all">tonkamluce@gmail.com</p>
+                </a>
+
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/luce-tonkam" target="_blank" rel="noopener noreferrer" class="card-custom p-6 rounded-2xl text-center flex flex-col items-center group">
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 text-accentIndigo flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </div>
+                    <h3 class="font-bold text-xs text-slate-200">LinkedIn</h3>
+                    <p class="text-[11px] text-slate-400 mt-1 font-medium">Luce Tonkam</p>
+                </a>
+
+                <!-- GitHub -->
+                <a href="https://github.com/tonkamluce-sketch" target="_blank" rel="noopener noreferrer" class="card-custom p-6 rounded-2xl text-center flex flex-col items-center group">
+                    <div class="w-12 h-12 rounded-2xl bg-purple-500/10 text-accentViolet flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-brands fa-github"></i>
+                    </div>
+                    <h3 class="font-bold text-xs text-slate-200">GitHub</h3>
+                    <p class="text-[11px] text-slate-400 mt-1 font-medium">tonkamluce-sketch</p>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800/80 text-center py-8 text-xs text-slate-500 relative z-10">
+        <p>&copy; 2026 MESSAMET TONKAM LUCE RIVONIA. Tous droits réservés.</p>
+    </footer>
+
+    <!-- MODALES DE CODE -->
+    <div id="modal-p1" class="fixed inset-0 bg-black/80 hidden backdrop-blur-md z-50 flex justify-center items-center p-4">
+        <div class="bg-[#1e293b] max-w-lg w-full rounded-2xl p-6 border border-slate-700 relative shadow-2xl">
+            <button onclick="toggleModal('modal-p1')" class="absolute top-4 right-4 text-slate-400 hover:text-white transition"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <h3 class="text-base font-bold text-accentCyan mb-3">Calculateur de Moyennes (Java)</h3>
+            <pre class="bg-slate-900 p-4 rounded-xl text-xs font-mono text-slate-300 overflow-x-auto border border-slate-800">
+public class GestionMoyenne {
+    public static void main(String[] args) {
+        int[] notes = {14, 16, 12, 18, 15};
+        int somme = 0;
+        for(int note : notes) {
+            somme += note;
+        }
+        double moyenne = (double) somme / notes.length;
+        System.out.println("Moyenne : " + moyenne);
+    }
+}</pre>
+        </div>
+    </div>
+
+    <div id="modal-p2" class="fixed inset-0 bg-black/80 hidden backdrop-blur-md z-50 flex justify-center items-center p-4">
+        <div class="bg-[#1e293b] max-w-lg w-full rounded-2xl p-6 border border-slate-700 relative shadow-2xl">
+            <button onclick="toggleModal('modal-p2')" class="absolute top-4 right-4 text-slate-400 hover:text-white transition"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <h3 class="text-base font-bold text-accentIndigo mb-3">Convertisseur de Devises (Java)</h3>
+            <pre class="bg-slate-900 p-4 rounded-xl text-xs font-mono text-slate-300 overflow-x-auto border border-slate-800">
+import java.util.Scanner;
+
+public class Convertisseur {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Entrez le montant en XAF : ");
+        double montant = scanner.nextDouble();
+        double euro = montant / 655.957;
+        System.out.printf("Montant : %.2f EUR\n", euro);
+        scanner.close();
+    }
+}</pre>
+        </div>
+    </div>
+
+    <!-- JS Helper -->
+    <script>
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if(modal) {
+                modal.classList.toggle('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
+```
